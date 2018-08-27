@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Rating__c</fullName>
+    <description>Rating scale for customers to rate beers</description>
+    <externalId>false</externalId>
+    <label>Rating</label>
+    <required>true</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Unsatisfactory - Would Not Recommend or Purchase Again</fullName>
+                <default>false</default>
+                <label>Unsatisfactory - Would Not Recommend or Purchase Again</label>
+            </value>
+            <value>
+                <fullName>Average - Would Not Purchase Again</fullName>
+                <default>false</default>
+                <label>Average - Would Not Purchase Again</label>
+            </value>
+            <value>
+                <fullName>Good - Would Purchase Again</fullName>
+                <default>false</default>
+                <label>Good - Would Purchase Again</label>
+            </value>
+            <value>
+                <fullName>Great - Would Recommend and Purchase Again</fullName>
+                <default>false</default>
+                <label>Great - Would Recommend and Purchase Again</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
