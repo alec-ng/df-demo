@@ -14,16 +14,18 @@
     <aura:method name="reset" action="{!c.reset}" />
     <aura:method name="getTime" action="{!c.reset}" />
 
-    <aura:attribute name="totalMsCount" type="Integer" description="Total time elapsed, in ms" />
-    <aura:attribute name="msCount" type="Integer" description="Milliseconds portion of time elapsed" />
-    <aura:attribute name="sCount" type="Integer" description="Seconds portion of time elapsed" />
-    <aura:attribute name="mCount" type="Integer" description="Minutes portion of time elapsed" />
-    <aura:attribute name="hCount" type="Integer" description="Hours portion of time elapsed" />
+    <aura:attribute name="totalMsCount" type="Integer" description="Total time elapsed, in ms" default="0" />
+    <aura:handler name="change" value="{!v.totalMsCount}" action="{!c.handleTotalMsCountChange}" />
+
+    <aura:attribute name="msCount" type="Integer" description="Milliseconds portion of time elapsed" default="0" />
+    <aura:attribute name="sCount" type="Integer" description="Seconds portion of time elapsed" default="0" />
+    <aura:attribute name="mCount" type="Integer" description="Minutes portion of time elapsed" default="0" />
+    <aura:attribute name="hCount" type="Integer" description="Hours portion of time elapsed" default="0" />
 
     <div class="stopwatch-container">
         <div class="row">
             <h1>
-                {!v.hCount}:{!v.mCount}:{!v.sCount} {!msCount}
+                Hours: {!v.hCount} | Minutes: {!v.mCount} | Seconds: {!v.sCount} | Milliseconds: {!v.msCount}
             </h1>
         </div>
         <div class="row">

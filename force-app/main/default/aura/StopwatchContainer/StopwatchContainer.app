@@ -3,5 +3,5 @@
  -->
 
 <aura:application description="For displaying Stopwatch.cmp">
-    <c:Stopwatch />
+    <c:Stopwatch /> 
 </aura:application>
