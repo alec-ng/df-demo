@@ -41,11 +41,11 @@
      */
     handleTotalMsCountChange: function(cmp, event, helper) {
         let currentMsCount = event.getParam("value");
-        let hCount = Math.floor(currentMsCount / helper.MS_HOUR_CONVERSION);
+        let hCount = Math.floor(currentMsCount / helper.constants.MS_HOUR_CONVERSION);
         currentMsCount =- hCount * helper.MS_HOUR_CONVERSION;
-        let mCount = Math.floor(currentMsCount / helper.MS_MINUTE_CONVERSION);
+        let mCount = Math.floor(currentMsCount / helper.constants.MS_MINUTE_CONVERSION);
         currentMsCount =- mCount * helper.MS_MINUTE_CONVERSION;
-        let sCount = Math.floor(currentMsCount / helper.MS_SECOND_CONVERSION);
+        let sCount = Math.floor(currentMsCount / helper.constants.MS_SECOND_CONVERSION);
         currentMsCount =- sCount * helper.MS_SECOND_CONVERSION;
 
         cmp.set("v.hCount", hCount);
