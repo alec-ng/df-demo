@@ -1,0 +1,36 @@
+<!--
+ - Created by Alec on 2018-09-03.
+ -->
+
+<aura:component description="Displays hh:mm:ss mmmm and allow a user to start, stop, and reset">
+
+    <ltng:require styles="{!join(',' ,
+            $Resource.slds_assets + '/styles/salesforce-lightning-design-system.min.css'
+        )}"
+    />
+
+    <aura:method name="start" action="{!c.start}" />
+    <aura:method name="stop" action="{!c.stop}" />
+    <aura:method name="reset" action="{!c.reset}" />
+    <aura:method name="getTime" action="{!c.reset}" />
+
+    <aura:attribute name="totalMsCount" type="Integer" description="Total time elapsed, in ms" />
+    <aura:attribute name="msCount" type="Integer" description="Milliseconds portion of time elapsed" />
+    <aura:attribute name="sCount" type="Integer" description="Seconds portion of time elapsed" />
+    <aura:attribute name="mCount" type="Integer" description="Minutes portion of time elapsed" />
+    <aura:attribute name="hCount" type="Integer" description="Hours portion of time elapsed" />
+
+    <div class="stopwatch-container">
+        <div class="row">
+            <h1>
+                {!v.hCount}:{!v.mCount}:{!v.sCount} {!msCount}
+            </h1>
+        </div>
+        <div class="row">
+            <lightning:button onclick="{!c.start}" label="Start" />
+            <lightning:button onclick="{!c.stop}" label="Stop" />
+            <lightning:button onclick="{!c.reset}" label="Reset" />
+        </div>
+    </div>
+
+</aura:component>
