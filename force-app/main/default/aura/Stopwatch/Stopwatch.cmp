@@ -1,7 +1,3 @@
-<!--
- - Created by Alec on 2018-09-03.
- -->
-
 <aura:component description="Displays hh:mm:ss mmmm and allow a user to start, stop, and reset">
 
     <ltng:require styles="{!join(',' ,
@@ -15,17 +11,12 @@
     <aura:method name="getTime" action="{!c.reset}" />
 
     <aura:attribute name="totalMsCount" type="Integer" description="Total time elapsed, in ms" default="0" />
-    <aura:handler name="change" value="{!v.totalMsCount}" action="{!c.handleTotalMsCountChange}" />
-
-    <aura:attribute name="msCount" type="Integer" description="Milliseconds portion of time elapsed" default="0" />
-    <aura:attribute name="sCount" type="Integer" description="Seconds portion of time elapsed" default="0" />
-    <aura:attribute name="mCount" type="Integer" description="Minutes portion of time elapsed" default="0" />
-    <aura:attribute name="hCount" type="Integer" description="Hours portion of time elapsed" default="0" />
+    <aura:handler name="change" value="{!v.totalSecondsCount}" action="{!c.handleTotalSecondsChanged}" />
 
     <div class="stopwatch-container">
         <div class="row">
             <h1>
-                Hours: {!v.hCount} | Minutes: {!v.mCount} | Seconds: {!v.sCount} | Milliseconds: {!v.msCount}
+                <span id="hours">{!v.hCount}</span>:<span id="minutes">{!v.mCount}</span>:<span id="seconds">{!v.sCount}</span>
             </h1>
         </div>
         <div class="row">

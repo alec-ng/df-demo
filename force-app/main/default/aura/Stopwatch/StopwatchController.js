@@ -6,13 +6,20 @@
      *
      */
     start: function(cmp, event, helper) {
-        queueMsIncrement();
+        if (!helper.resetTimestamp) {
+            helper.resetTimestamp = Date.now();
+        }
+
+        window.setTimeout(function() {
+            cmp.set("totalSecondsCount", cmp.get("totalSecondsCount") + 1);
+
+        }, 1000);
 
         function queueMsIncrement() {
             helper.counterTimeout = window.setTimeout(function() {
                 cmp.set("v.totalMsCount", cmp.get("v.totalMsCount") + 1);
                 queueMsIncrement(); // recursive
-            }, 1);
+            }, 1000);
         }
     },
 
@@ -28,7 +35,7 @@
      */
     reset: function(cmp, event, helper) {
         cmp.set("v.totalMsCount", 0);
-        window.clearTimeout(helper.counterTimeout);
+        helper.resetTimestamp = null;
         helper.counterTimeout = null;
     },
 
@@ -54,10 +61,15 @@
             currentMsCount =- sCount * helper.constants.MS_SECOND_CONVERSION;
         }
 
-        cmp.set("v.hCount", hCount);
-        cmp.set("v.mCount", mCount);
-        cmp.set("v.sCount", sCount);
-        cmp.set("v.msCount", currentMsCount);
+        cmp.set('totalMsCount', currentMsCount - helper.resetTimestamp);
+        document.getElementById('hours').innerText(formatNumToStr(hCount));
+        document.getElementById('minutes').innerText(formatNumToStr(mCount));
+        document.getElementById('seconds').innerText(formatNumToStr(sCount));
+
+        function formatNumToStr(num) {
+            return num.toString().length < 2 ? '0' + num.toString() : num.toString();
+        }
+
     }
 
 })
