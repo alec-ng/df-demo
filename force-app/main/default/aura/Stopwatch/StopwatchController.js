@@ -10,16 +10,15 @@
             helper.resetTimestamp = Date.now();
         }
 
-        window.setTimeout(function() {
-            cmp.set("totalSecondsCount", cmp.get("totalSecondsCount") + 1);
-
-        }, 1000);
+        queueMsIncrement();
 
         function queueMsIncrement() {
-            helper.counterTimeout = window.setTimeout(function() {
-                cmp.set("v.totalMsCount", cmp.get("v.totalMsCount") + 1);
-                queueMsIncrement(); // recursive
-            }, 1000);
+            if (helper.resetTimestamp) {
+                helper.counterTimeout = window.setTimeout(function() {
+                    cmp.set("v.totalMsCount", cmp.get("v.totalMsCount") + 1000);
+                    queueMsIncrement(); // recursive
+                }, 1000);
+            }
         }
     },
 
@@ -36,35 +35,37 @@
     reset: function(cmp, event, helper) {
         cmp.set("v.totalMsCount", 0);
         helper.resetTimestamp = null;
+        window.clearTimeout(helper.counterTimeout);
         helper.counterTimeout = null;
     },
 
     getTime: function(cmp, event, helper) {
-        return cmp.get("v.totalMsCount");
+        return Date.now() - helper.resetTimestamp;
     },
 
     /**
      *
      */
-    handleTotalMsCountChange: function(cmp, event, helper) {
+    handleTotalMsChanged: function(cmp, event, helper) {
         let currentMsCount = event.getParam("value");
+        let totalMsCount = currentMsCount;
         let hCount = Math.floor(currentMsCount / helper.constants.MS_HOUR_CONVERSION);
         if (hCount > 0) {
-            currentMsCount =- hCount * helper.constants.MS_HOUR_CONVERSION;
+            currentMsCount = currentMsCount - (hCount * helper.constants.MS_HOUR_CONVERSION);
         }
         let mCount = Math.floor(currentMsCount / helper.constants.MS_MINUTE_CONVERSION);
         if (mCount > 0) {
-            currentMsCount =- mCount * helper.constants.MS_MINUTE_CONVERSION;
+            currentMsCount = currentMsCount - (mCount * helper.constants.MS_MINUTE_CONVERSION);
         }
         let sCount = Math.floor(currentMsCount / helper.constants.MS_SECOND_CONVERSION);
         if (sCount > 0) {
-            currentMsCount =- sCount * helper.constants.MS_SECOND_CONVERSION;
+            currentMsCount = currentMsCount - (sCount * helper.constants.MS_SECOND_CONVERSION);
         }
 
-        cmp.set('totalMsCount', currentMsCount - helper.resetTimestamp);
-        document.getElementById('hours').innerText(formatNumToStr(hCount));
-        document.getElementById('minutes').innerText(formatNumToStr(mCount));
-        document.getElementById('seconds').innerText(formatNumToStr(sCount));
+        cmp.set('v.totalMsCount', totalMsCount);
+        document.getElementById('hours').innerText = formatNumToStr(hCount);
+        document.getElementById('minutes').innerText = formatNumToStr(mCount);
+        document.getElementById('seconds').innerText = formatNumToStr(sCount);
 
         function formatNumToStr(num) {
             return num.toString().length < 2 ? '0' + num.toString() : num.toString();

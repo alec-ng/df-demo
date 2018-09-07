@@ -11,12 +11,12 @@
     <aura:method name="getTime" action="{!c.reset}" />
 
     <aura:attribute name="totalMsCount" type="Integer" description="Total time elapsed, in ms" default="0" />
-    <aura:handler name="change" value="{!v.totalSecondsCount}" action="{!c.handleTotalSecondsChanged}" />
+    <aura:handler name="change" value="{!v.totalMsCount}" action="{!c.handleTotalMsChanged}" />
 
     <div class="stopwatch-container">
         <div class="row">
             <h1>
-                <span id="hours">{!v.hCount}</span>:<span id="minutes">{!v.mCount}</span>:<span id="seconds">{!v.sCount}</span>
+                <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
             </h1>
         </div>
         <div class="row">
