@@ -10,19 +10,18 @@
     <aura:method name="reset" action="{!c.reset}" />
     <aura:method name="getTime" action="{!c.reset}" />
 
+    <aura:attribute name="isStopwatchActive" type="Boolean" default="false" />
     <aura:attribute name="totalMsCount" type="Integer" description="Total time elapsed, in ms" default="0" />
     <aura:handler name="change" value="{!v.totalMsCount}" action="{!c.handleTotalMsChanged}" />
 
     <div class="stopwatch-container">
-        <div class="row">
-            <h1>
-                <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
-            </h1>
+        <div class="counter-row">
+            <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>:<span id="milliseconds">000</span>
         </div>
         <div class="row">
-            <lightning:button onclick="{!c.start}" label="Start" />
-            <lightning:button onclick="{!c.stop}" label="Stop" />
-            <lightning:button onclick="{!c.reset}" label="Reset" />
+            <lightning:button class="stopwatch-btn green" onclick="{!c.start}" label="Start" />
+            <lightning:button class="stopwatch-btn red" onclick="{!c.stop}" label="Stop" />
+            <lightning:button class="stopwatch-btn grey" onclick="{!c.reset}" label="Reset" />
         </div>
     </div>
 

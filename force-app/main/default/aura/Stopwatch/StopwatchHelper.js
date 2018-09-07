@@ -2,9 +2,6 @@
  * Created by Alec on 2018-09-03.
  */
 ({
-    // holds the id of the timer that was set
-    counterTimeout: null,
-
     // timestamp of when the timer is started for the first time
     resetTimetamp : null,
 

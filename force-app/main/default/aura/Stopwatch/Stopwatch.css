@@ -1,5 +1,29 @@
 /**
  * Created by Alec on 2018-09-03.
  */
-.THIS {
+
+.THIS .counter-row {
+    font-size: 75px;
+}
+
+
+.THIS .stopwatch-btn {
+    text-transform: uppercase;
+    width: 250px;
+    color: white;
+}
+.THIS .stopwatch-btn:focus {
+    box-shadow: none;
+}
+.THIS .stopwatch-btn:active {
+    background-color: inherit;
+}
+.THIS .stopwatch-btn.green {
+    background-color: green;
+}
+.THIS .stopwatch-btn.red {
+    background-color: red;
+}
+.THIS .stopwatch-btn.grey {
+    background-color: grey;
 }

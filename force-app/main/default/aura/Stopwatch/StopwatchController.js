@@ -6,18 +6,17 @@
      *
      */
     start: function(cmp, event, helper) {
-        if (!helper.resetTimestamp) {
-            helper.resetTimestamp = Date.now();
-        }
+        cmp.set("v.isStopwatchActive", true);
 
-        queueMsIncrement();
+        setTotalMsCount();
 
-        function queueMsIncrement() {
-            if (helper.resetTimestamp) {
-                helper.counterTimeout = window.setTimeout(function() {
-                    cmp.set("v.totalMsCount", cmp.get("v.totalMsCount") + 1000);
-                    queueMsIncrement(); // recursive
-                }, 1000);
+        function setTotalMsCount(timestamp) {
+            if (cmp.get("v.isStopwatchActive")) {
+                if (!helper.resetTimestamp) {
+                    helper.resetTimestamp = timestamp;
+                }
+                cmp.set("v.totalMsCount", timestamp - helper.resetTimestamp);
+                window.requestAnimationFrame(setTotalMsCount);
             }
         }
     },
@@ -26,7 +25,7 @@
      *
      */
     stop: function(cmp, event, helper) {
-        window.clearTimeout(helper.counterTimeout);
+        cmp.set("v.isStopwatchActive", false);
     },
 
     /**
@@ -34,21 +33,19 @@
      */
     reset: function(cmp, event, helper) {
         cmp.set("v.totalMsCount", 0);
+        cmp.set("v.isStopwatchActive", false);
         helper.resetTimestamp = null;
-        window.clearTimeout(helper.counterTimeout);
-        helper.counterTimeout = null;
     },
 
     getTime: function(cmp, event, helper) {
-        return Date.now() - helper.resetTimestamp;
+        return cmp.get("v.totalMsCount");
     },
 
     /**
      *
      */
     handleTotalMsChanged: function(cmp, event, helper) {
-        let currentMsCount = event.getParam("value");
-        let totalMsCount = currentMsCount;
+        let currentMsCount = parseInt(event.getParam("value")); // msCount is a double
         let hCount = Math.floor(currentMsCount / helper.constants.MS_HOUR_CONVERSION);
         if (hCount > 0) {
             currentMsCount = currentMsCount - (hCount * helper.constants.MS_HOUR_CONVERSION);
@@ -62,13 +59,17 @@
             currentMsCount = currentMsCount - (sCount * helper.constants.MS_SECOND_CONVERSION);
         }
 
-        cmp.set('v.totalMsCount', totalMsCount);
-        document.getElementById('hours').innerText = formatNumToStr(hCount);
-        document.getElementById('minutes').innerText = formatNumToStr(mCount);
-        document.getElementById('seconds').innerText = formatNumToStr(sCount);
+        document.getElementById('hours').innerText = formatNumToStr(hCount, 2);
+        document.getElementById('minutes').innerText = formatNumToStr(mCount, 2);
+        document.getElementById('seconds').innerText = formatNumToStr(sCount, 2);
+        document.getElementById('milliseconds').innerText = formatNumToStr(currentMsCount, 3);
 
-        function formatNumToStr(num) {
-            return num.toString().length < 2 ? '0' + num.toString() : num.toString();
+        function formatNumToStr(num, length) {
+            num = num.toString();
+            while (num.length < length) {
+                num = '0' + num;
+            }
+            return num;
         }
 
     }
