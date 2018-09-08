@@ -1,11 +1,10 @@
 describe("Stopwatch", function() {
 
     beforeEach(function() {
-
+        // Nothing needs to be done here.
     });
 
     afterEach(function() {
-
         // Each spec (test) renders its components into the same div,
         // so we need to clear that div out at the end of each spec.
         $T.clearRenderedTestComponents();

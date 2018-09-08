@@ -1,7 +1,7 @@
 <aura:component description="Displays hh:mm:ss mmmm and allow a user to start, stop, and reset">
 
     <ltng:require styles="{!join(',' ,
-            $Resource.slds_assets + '/styles/salesforce-lightning-design-system.min.css'
+            $Resource.bootstrap + '/bootstrap.min.css'
         )}"
     />
 
@@ -14,14 +14,18 @@
     <aura:attribute name="totalMsCount" type="Integer" description="Total time elapsed, in ms" default="0" />
     <aura:handler name="change" value="{!v.totalMsCount}" action="{!c.handleTotalMsChanged}" />
 
-    <div class="stopwatch-container">
-        <div class="counter-row">
-            <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>:<span id="milliseconds">000</span>
+    <div class="stopwatch-container container">
+        <div class="counter-row row text-center">
+            <div class="col">
+                <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>:<span id="milliseconds">000</span>
+            </div>
         </div>
-        <div class="row">
-            <lightning:button class="stopwatch-btn green" onclick="{!c.start}" label="Start" />
-            <lightning:button class="stopwatch-btn red" onclick="{!c.stop}" label="Stop" />
-            <lightning:button class="stopwatch-btn grey" onclick="{!c.reset}" label="Reset" />
+        <div class="row text-center">
+            <div class="col">
+                <lightning:button class="stopwatch-btn green" onclick="{!c.start}" label="Start" />
+                <lightning:button class="stopwatch-btn red" onclick="{!c.stop}" label="Stop" />
+                <lightning:button class="stopwatch-btn grey" onclick="{!c.reset}" label="Reset" />
+            </div>
         </div>
     </div>
 
