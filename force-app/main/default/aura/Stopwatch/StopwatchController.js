@@ -42,14 +42,6 @@
     },
 
     /**
-     * Returns the total ms elapsed on the stopwatch. If this is called when the stopwatch is active, this
-     * returns a close approximation of the total ms elapsed at the time this was called
-     */
-    getTime: function(cmp, event, helper) {
-        return cmp.get("v.totalMsCount");
-    },
-
-    /**
      * Fired on the change handler for v.totalMsCount. Converts the total ms elapsed to hours, min, seconds and ms
      * and updates the DOM with the converted values
      */

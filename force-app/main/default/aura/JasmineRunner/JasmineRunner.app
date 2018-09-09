@@ -1,0 +1,15 @@
+<!--
+ - Created by Alec on 2018-09-03.
+ -->
+
+<aura:application
+        description="Custom Jasmine test runner. It uses the lts_jasmineRunner component from the LTS unmanaged
+        package, which takes a comma delimited string of Resource paths pointing to your test classes.
+        Running the app in the browser or through the CLI will execute the Jasmine tests.">
+
+    <c:lts_jasmineRunner testFiles="{!join(',',
+    	    $Resource.LightningTests + '/StopwatchTest.js'
+        )}"
+    />
+
+</aura:application>

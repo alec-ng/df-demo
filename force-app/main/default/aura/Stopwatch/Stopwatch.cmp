@@ -8,7 +8,6 @@
     <aura:method name="start" action="{!c.start}" />
     <aura:method name="stop" action="{!c.stop}" />
     <aura:method name="reset" action="{!c.reset}" />
-    <aura:method name="getTime" action="{!c.reset}" />
 
     <aura:attribute name="isStopwatchActive" type="Boolean" default="false" />
     <aura:attribute name="totalMsCount" type="Integer" description="Total time elapsed, in ms" default="0" />
