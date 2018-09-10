@@ -1,7 +1,3 @@
-<!--
- - Created by Alec on 2018-09-03.
- -->
-
 <aura:application
         description="Custom Jasmine test runner. It uses the lts_jasmineRunner component from the LTS unmanaged
         package, which takes a comma delimited string of Resource paths pointing to your test classes.

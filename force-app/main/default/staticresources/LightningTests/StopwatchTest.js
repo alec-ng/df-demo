@@ -1,8 +1,4 @@
 /**
-* Created by Alec on 2018-09-03.
-*/
-
-/**
  * "describe": function for grouping related specs
  */
 describe("Stopwatch.cmp", function() {

@@ -1,6 +1,3 @@
-/**
- * Created by Alec on 2018-09-08.
- */
 @IsTest
 private class SampleTestClass {
 

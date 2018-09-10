@@ -2,7 +2,17 @@
  * Created by Alec on 2018-09-03.
  */
 
-.THIS .counter-row {
+.THIS #hours, .THIS #minutes, .THIS #seconds {
+    display: inline-block;
+    width: 85px;
+}
+
+.THIS #milliseconds {
+    display: inline-block;
+    width: 125px;
+}
+
+ .THIS .counter-row {
     font-size: 75px;
 }
 
