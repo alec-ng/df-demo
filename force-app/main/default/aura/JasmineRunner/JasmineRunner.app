@@ -9,7 +9,7 @@
 
     <c:lts_jasmineRunner testFiles="{!join(',',
     	    $Resource.LightningTests + '/StopwatchTest.js'
-        )}"
+    )}"
     />
 
 </aura:application>

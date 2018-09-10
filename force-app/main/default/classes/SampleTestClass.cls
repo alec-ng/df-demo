@@ -14,7 +14,7 @@ private class SampleTestClass {
 
     @IsTest
     static void myTest() {
-        // System library  provides three assertion methods
+        // System library assertion methods
         System.assert(true);
         System.assertEquals(true, true);
         System.assertNotEquals(true, false);

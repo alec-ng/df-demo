@@ -1,7 +1,11 @@
 /**
 * Created by Alec on 2018-09-03.
 */
-describe("Stopwatch", function() {
+
+/**
+ * "describe": function for grouping related specs
+ */
+describe("Stopwatch.cmp", function() {
 
     /**
      * Setup: this anonymous function is run before every spec
@@ -19,10 +23,34 @@ describe("Stopwatch", function() {
     });
 
     /**
-     * Demonstrate we can assert against DOM elements
-     * The param "done" is an optional argument that is called if any async work is complete
-     * Helps enforce the default 5 second timeout period Jasmine has for any async spec to finish
+     * "it": a "spec", or a test that contains one or more "expectations", or assertions
      */
+    it("Resets the count back to zero after the stopwatch is reset", function(done) {
+        $T.createComponent("c:Stopwatch", {}, true)
+            .then(function(cmp) {
+                cmp.start();
+                window.setTimeout(function() {
+                    cmp.reset();
+                    expect(cmp.get("v.isStopwatchActive")).toBe(false);
+                    expect(cmp.get("v.totalMsCount")).toBe(0);
+
+                    let hoursLabel = document.getElementById('hours').innerText;
+                    expect(hoursLabel).toBe('00'); // toBe : ===
+                    let minutesLabel = document.getElementById('minutes').innerText;
+                    expect(minutesLabel).toBe('00');
+                    let secondsLabel = document.getElementById('seconds').innerText;
+                    expect(secondsLabel).toBe('00');
+                    let msLabel = document.getElementById('milliseconds').innerText;
+                    expect(msLabel).toBe('000');
+
+                    done();
+                }, 1000);
+            })
+            .catch(function(e) {
+                done.fail(e);
+            });
+    });
+
     it("Initially shows a zero count and is not running", function(done) {
         $T.createComponent("c:Stopwatch", {}, true)
             .then(function(cmp) {
@@ -44,8 +72,6 @@ describe("Stopwatch", function() {
             });
     });
 
-    /**
-     */
     it("Starts counting when the stopwatch is started", function(done) {
         $T.createComponent("c:Stopwatch", {}, true)
             .then(function(cmp) {
@@ -79,32 +105,6 @@ describe("Stopwatch", function() {
                         expect(stopCount).toBe(futureCount);
                         done();
                     }, 1000);
-                }, 1000);
-            })
-            .catch(function(e) {
-                done.fail(e);
-            });
-    });
-
-    it("Resets the count back to zero after the stopwatch is reset", function(done) {
-        $T.createComponent("c:Stopwatch", {}, true)
-            .then(function(cmp) {
-                cmp.start();
-                window.setTimeout(function() {
-                    cmp.reset();
-                    expect(cmp.get("v.isStopwatchActive")).toBe(false);
-                    expect(cmp.get("v.totalMsCount")).toBe(0);
-
-                    let hoursLabel = document.getElementById('hours').innerText;
-                    expect(hoursLabel).toBe('00'); // toBe : ===
-                    let minutesLabel = document.getElementById('minutes').innerText;
-                    expect(minutesLabel).toBe('00');
-                    let secondsLabel = document.getElementById('seconds').innerText;
-                    expect(secondsLabel).toBe('00');
-                    let msLabel = document.getElementById('milliseconds').innerText;
-                    expect(msLabel).toBe('000');
-
-                    done();
                 }, 1000);
             })
             .catch(function(e) {
