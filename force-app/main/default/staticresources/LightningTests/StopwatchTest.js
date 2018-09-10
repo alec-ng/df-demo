@@ -112,26 +112,6 @@ describe("Stopwatch.cmp", function() {
             });
     });
 
-    it("Counts real time accurately", function(done) {
-        $T.createComponent("c:Stopwatch", {}, true)
-            .then(function(cmp) {
-                let timeRunMs = 1000;
-                cmp.start();
-                window.setTimeout(function() {
-                    cmp.stop();
-                    // Quick and dirty assertion - err tolerance accounts for timing taken to
-                    // run test method, run method to stop stopwatch, etc
-                    let errTolerance = 25; // 25ms
-                    expect(cmp.get("v.totalMsCount") >= (timeRunMs - errTolerance)).toBe(true);
-                    expect(cmp.get("v.totalMsCount") <= (timeRunMs + errTolerance)).toBe(true);
-                    done();
-                }, timeRunMs);
-            })
-            .catch(function(e) {
-                done.fail(e);
-            });
-    });
-
     it("Renders the total time elapsed in hours, minutes, seconds, and milliseconds", function(done) {
         $T.createComponent("c:Stopwatch", {}, true)
             .then(function(cmp) {
